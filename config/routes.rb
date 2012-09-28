@@ -1,11 +1,11 @@
 Authorization::Application.routes.draw do
-  get "user/index"
+  resource :users, :only => [:index, :create, :new]
 
-  get "user/login"
+  get "users/index"
 
-  get "user/registration"
+  get "users/login"
 
-  root :to => 'user#registration'
+  root :to => 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
