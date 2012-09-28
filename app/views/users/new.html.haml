@@ -1,5 +1,5 @@
 %h1 Hello
-%p Register please
+%p Register now!
 = form_for(@user) do |f|
   - if @user.errors.any?
     %div#error_explanation
@@ -28,3 +28,6 @@
   %div.actions
     = f.submit "Sign up"
 -
+%p
+  Already registered?
+  = link_to "Log in!", new_sessions_path

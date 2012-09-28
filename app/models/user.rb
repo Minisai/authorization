@@ -9,6 +9,8 @@ end
 class User < ActiveRecord::Base
   attr_accessible :auth2step, :email, :login, :password, :salt, :password_confirmation
 
+  belongs_to :role
+
   validates :login, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :length => { :within => 3..15 }
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
                     :uniqueness => { :case_sensitive => false },
                     :email => true
 
-  before_save :encrypt_password
+  before_save :set_role, :encrypt_password
 
   def valid_password?(submitted_password)
     password = encrypt(submitted_password)
@@ -31,11 +33,22 @@ class User < ActiveRecord::Base
     return user if user.valid_password?(submitted_password)
   end
 
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    return nil  if user.nil?
+    return user if user.salt == cookie_salt
+  end
+
   private
 
+  def set_role
+    User.all.count > 0 ? self.role = Role.user : self.role = Role.admin
+  end
+
+  #for password encrypting
   def encrypt_password
     self.salt = make_salt if new_record?
-    self.password = ecrypt(password)
+    self.password = encrypt(password)
   end
 
   def encrypt(string)
@@ -49,4 +62,5 @@ class User < ActiveRecord::Base
   def secure_hash(string)
     Digest::SHA2.hexdigest(string)
   end
+
 end
