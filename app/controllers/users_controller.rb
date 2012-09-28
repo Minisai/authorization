@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:show, :index]
+
   def show
-    redirect_to new_users_path unless current_user
+
   end
 
   def index
@@ -19,6 +21,12 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  private
+
+  def authenticate
+    redirect_to new_users_path unless log_in?
   end
 
 end
