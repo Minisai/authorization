@@ -2,9 +2,15 @@ Authorization::Application.routes.draw do
   resource :users, :except => [:destroy, :update]
   resource :sessions, :only => [:create, :destroy, :new]
 
-  match "/login" => 'sessions#new'
+  match "users/:id" => 'users#show', :as => :user
 
-  root :to => 'users#show'
+  match "/index" => 'users#index'
+  match "/log_in" => 'sessions#new'
+  match "/log_out" => 'sessions#destroy'
+  match "/register" => 'users#new'
+
+
+  root :to => 'users#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

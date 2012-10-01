@@ -1,7 +1,7 @@
 module UsersHelper
 
-  def authorization_code
-    rand(10 ** 6)
+  def gravatar_for(email)
+    image_tag "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email)}?d=wavatar"
   end
 
 end

@@ -1,0 +1,16 @@
+h1 Log in
+
+= form_for(:session, :url => sessions_path) do |f|
+  div.field
+    = f.label :email, "Email or Login"
+    = f.text_field :email
+  div.field
+    = f.label :password
+    = f.password_field :password
+  div.actions
+    = f.submit "Log in"
+-
+
+p
+  | New user?
+  = link_to " Register now!", new_users_path

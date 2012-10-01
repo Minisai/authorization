@@ -1,0 +1,39 @@
+doctype
+html
+  head
+  title Registration app
+  = stylesheet_link_tag "application", :media => "all"
+  = javascript_include_tag "application"
+  = csrf_meta_tags
+  body
+    div.container
+      div.navbar
+        div.navbar-inner
+          div.container
+            a.btn.btn-navbar data-bind={"toggle:'collapse', target:'.nav-collapse'"}
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.brand href="/users/"
+              | Anton Jyha
+            div.nav-collapse
+              ul.nav
+                li.active
+                  = link_to "Home", "/users/", :remote => true
+                li
+                  a href="/index/"
+                    | Users
+                - if current_user.present?
+                  li
+                    a href="/log_out"
+                      | Log out
+                - else
+                  li
+                    a href="/log_in"
+                      | Log in
+                  li
+                    a href="/register"
+                      | Register
+      div#for_form
+      div#page
+        = yield

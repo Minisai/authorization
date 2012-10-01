@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:show, :index]
+  before_filter :authenticate, :only => [:show]
 
   def show
-
+    @user = User.find_by_id(params[:id])
+    @user||=current_user
+    respond_to do |format|
+      format.html
+      format.js { render 'show'}
+    end
   end
 
   def index
@@ -26,7 +31,12 @@ class UsersController < ApplicationController
   private
 
   def authenticate
-    redirect_to new_users_path unless log_in?
+    unless log_in?
+      @user = User.new
+      respond_to do |format|
+        format.html { redirect_to new_users_path}
+        format.js { render 'register_form'}
+      end
+    end
   end
-
 end
