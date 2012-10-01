@@ -1,2 +1,2 @@
 $('#page').html("<%= escape_javascript(render "profile") %>")
-window.history.pushState(""," ", "<%= escape_javascript(user_path(current_user)) %>");
+window.history.pushState(""," ", "<%= escape_javascript(user_path(@user)) %>");

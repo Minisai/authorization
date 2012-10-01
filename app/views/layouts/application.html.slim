@@ -14,15 +14,13 @@ html
               span.icon-bar
               span.icon-bar
               span.icon-bar
-            a.brand href="/users/"
-              | Anton Jyha
+            = link_to "Anton Jyha", "/users/", :remote => true, :class => "brand"
             div.nav-collapse
               ul.nav
                 li.active
                   = link_to "Home", "/users/", :remote => true
                 li
-                  a href="/index/"
-                    | Users
+                  = link_to "Users", index_path, :remote => true
                 - if current_user.present?
                   li
                     a href="/log_out"

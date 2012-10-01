@@ -1,0 +1,2 @@
+$('#page').html("<%= escape_javascript(render "list") %>")
+window.history.pushState(""," ", "<%= escape_javascript(index_path) %>");

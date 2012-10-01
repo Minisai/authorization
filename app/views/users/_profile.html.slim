@@ -1,9 +1,11 @@
 div#profile
   h1
     | Hey,
-    =" " + current_user.login
+    =" " + @user.login
   p
-    | It's your personal page
-  = gravatar_for current_user.email
+  = gravatar_for @user.email
+  - if @user == current_user
+    = @user.email
+  -
   br
   = link_to "Log out", sessions_path, method: :delete, data: { confirm: 'Are you sure?' }

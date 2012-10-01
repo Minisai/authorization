@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
-    @user||=current_user
+    @user ||= current_user
     respond_to do |format|
       format.html
       format.js { render 'show'}
@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = Role.user.users
+    @users = @users.paginate(:page => params[:page])
 
   end
 
