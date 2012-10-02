@@ -32,6 +32,9 @@ gem 'slim-rails'
 gem 'faker'
 
 gem 'bcrypt-ruby'
+
+gem 'omniauth-twitter'
+
 #gem 'haml-rails'
 
 # To use ActiveModel has_secure_password

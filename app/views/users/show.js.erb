@@ -1,4 +1,4 @@
 $('#closeButton').click();
 $('#navbar_actions').html("<%= escape_javascript(render "navbar_actions") %>")
 $('#page').html("<%= escape_javascript(render "profile") %>")
-window.history.pushState(""," ", "<%= escape_javascript(user_path(@user)) %>");
+window.history.pushState(""," ", "<%= escape_javascript(user_path(@user||current_user)) %>");

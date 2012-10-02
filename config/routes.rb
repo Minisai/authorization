@@ -9,6 +9,7 @@ Authorization::Application.routes.draw do
   match "/log_out" => 'sessions#destroy'
   match "/register" => 'users#new'
 
+  match "/auth/:provider/callback" => "sessions#create"
 
   root :to => 'users#index'
 

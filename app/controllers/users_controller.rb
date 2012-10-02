@@ -13,7 +13,6 @@ class UsersController < ApplicationController
   def index
     @users = Role.user.users
     @users = @users.paginate(:per_page => 5, :page => params[:page])
-
   end
 
   def new

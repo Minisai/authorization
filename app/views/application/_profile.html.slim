@@ -1,7 +1,7 @@
+
 div#profile
   h1
-    | Hey,
-    =" " + @user.login
+    =@user.login
   p
   = gravatar_for @user.email
   - if @user == current_user

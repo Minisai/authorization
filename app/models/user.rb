@@ -9,7 +9,7 @@ end
 class User < ActiveRecord::Base
   has_secure_password
 
-  attr_accessible :auth2step, :email, :login, :password, :password_confirmation, :password_digest
+  attr_accessible :auth2step, :provider, :uid, :email, :login, :password, :password_confirmation, :password_digest
 
   belongs_to :role
 
@@ -25,33 +25,19 @@ class User < ActiveRecord::Base
 
   before_save :set_role, :fields_downcase
 
-  #def valid_password?(submitted_password)
-  #  password == submitted_password
-  #end
-
-  #def self.authenticate(email, submitted_password)
-  #  user = find_by_email(email)
-  #  user ||= find_by_login(email)
-  #  return nil  if user.nil?
-  #  return user if user.valid_password?(submitted_password) #
-  #  #if user.valid_password?(submitted_password)
-  #  #  if user.auth2step
-  #  #    return user
-  #  #  else
-  #  #    return nil
-  #  #  end
-  #  #end
-  #end
-
   def self.authenticate_with_cookies(id, cookie_password)
     user = find_by_id(id)
     return nil  if user.nil?
     return user if user.password == cookie_password
   end
 
-  #def registration_token
-  #  self.salt[0..5]
-  #end
+  def self.create_with_omniauth(auth)
+    create! do |user|
+      user.provider = auth["provider"]
+      user.uid = auth["uid"]
+      user.login = auth["user_info"]["name"]
+    end
+  end
 
   private
 
@@ -63,22 +49,5 @@ class User < ActiveRecord::Base
     self.email = self.email.downcase
     self.login = self.login.downcase
   end
-  #for password encrypting
-  #def encrypt_password
-  #  self.salt = make_salt if new_record?
-  #  self.password = encrypt(password)
-  #end
-  #
-  #def encrypt(string)
-  #  secure_hash("#{salt}--#{string}")
-  #end
-  #
-  #def make_salt
-  #  secure_hash("#{Time.now.utc}--#{password}")
-  #end
-  #
-  #def secure_hash(string)
-  #  Digest::SHA2.hexdigest(string)
-  #end
 
 end
