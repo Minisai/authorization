@@ -35,6 +35,8 @@ gem 'bcrypt-ruby'
 
 gem 'omniauth-twitter'
 
+gem 'rails_admin'
+
 #gem 'haml-rails'
 
 # To use ActiveModel has_secure_password

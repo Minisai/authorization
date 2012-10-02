@@ -36,3 +36,5 @@ div#myModal.modal tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ari
     p
       | Already registered?
       = link_to " Log in!", new_sessions_path, :remote=>true
+    p
+      = link_to "Log in with Twitter", "/auth/twitter"
