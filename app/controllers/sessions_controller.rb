@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   def new
-
+    respond_to do |format|
+      format.html
+      format.js { render '/users/form'}
+    end
   end
 
   def create
@@ -10,12 +13,12 @@ class SessionsController < ApplicationController
       render 'new'
     else
       log_in user
-      redirect_to root_path
+      redirect_to current_user
     end
   end
 
   def destroy
     log_out
-    redirect_to new_sessions_path
+    redirect_to index_path
   end
 end

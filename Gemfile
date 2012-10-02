@@ -28,6 +28,8 @@ gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 
 gem 'slim-rails'
+
+gem 'faker'
 #gem 'haml-rails'
 
 # To use ActiveModel has_secure_password

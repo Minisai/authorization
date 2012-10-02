@@ -1,11 +1,1 @@
-div#profile
-  h1
-    | Hey,
-    =" " + @user.login
-  p
-  = gravatar_for @user.email
-  - if @user == current_user
-    = @user.email
-  -
-  br
-  = link_to "Log out", sessions_path, method: :delete, data: { confirm: 'Are you sure?' }
+= render "profile"

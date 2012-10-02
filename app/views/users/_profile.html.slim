@@ -7,5 +7,3 @@ div#profile
   - if @user == current_user
     = @user.email
   -
-  br
-  = link_to "Log out", sessions_path, method: :delete, data: { confirm: 'Are you sure?' }

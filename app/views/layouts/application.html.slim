@@ -15,23 +15,8 @@ html
               span.icon-bar
               span.icon-bar
             = link_to "Anton Jyha", "/users/", :remote => true, :class => "brand"
-            div.nav-collapse
-              ul.nav
-                li.active
-                  = link_to "Home", "/users/", :remote => true
-                li
-                  = link_to "Users", index_path, :remote => true
-                - if current_user.present?
-                  li
-                    a href="/log_out"
-                      | Log out
-                - else
-                  li
-                    a href="/log_in"
-                      | Log in
-                  li
-                    a href="/register"
-                      | Register
+            div#navbar_actions
+              = render "navbar_actions"
       div#for_form
       div#page
         = yield

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user ||= current_user
     respond_to do |format|
       format.html
-      format.js { render 'show'}
+      format.js { render 'show' }
     end
   end
 
@@ -18,15 +18,25 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    respond_to do |format|
+      format.html
+      format.js { render 'register_form' }
+    end
   end
 
   def create
     @user = User.new(params[:user])
     if @user.save
       log_in @user
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to current_user }
+        format.js { render 'show' }
+      end
     else
-      render 'new'
+      respond_to do |format|
+        format.html { render "new" }
+        format.js { render 'register_form' }
+      end
     end
   end
 
@@ -37,7 +47,7 @@ class UsersController < ApplicationController
       @user = User.new
       respond_to do |format|
         format.html { redirect_to new_users_path}
-        format.js { render 'register_form'}
+        format.js { render 'form'}
       end
     end
   end

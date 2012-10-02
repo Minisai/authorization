@@ -10,7 +10,12 @@
   Role.find_or_create_by_name name
 end
 
-["das","qwe","zxc"].each do |login|
+User.create!(:login => "DAS", :email => "das@mail.ru", :password => "123456")
+
+50.times do |n|
+  login = Faker::Name.name
+
   User.create!(:login => login, :email => "#{login}@mail.ru", :password => "123456")
 end
+
 

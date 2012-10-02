@@ -1,10 +1,1 @@
-= will_paginate
-
-ul.users
-  -@users.each do |user|
-    li
-      = gravatar_for user.email
-      = link_to user.login, user
-  -
-
-= will_paginate
+= render "list"

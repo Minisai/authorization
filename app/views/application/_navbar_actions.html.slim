@@ -1,0 +1,14 @@
+div.nav-collapse
+  ul.nav
+    li.active
+      = link_to "Home", "/users/", :remote => true
+    li
+      = link_to "Users", index_path, :remote => true
+      - if current_user.present?
+        li
+          = link_to "Log out", sessions_path, :remote => true, method: :delete, data: { confirm: 'Are you sure?' }
+      - else
+        li
+          = link_to "Log in", new_sessions_path, :remote => true
+        li
+          = link_to "Register", new_users_path, :remote => true
