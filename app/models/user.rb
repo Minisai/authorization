@@ -15,10 +15,10 @@ class User < ActiveRecord::Base
 
   validates :login, :presence => true,
                     :uniqueness => { :case_sensitive => false },
-                    :length => { :within => 3..15 }
+                    :length => { :within => 3..30 }
   validates :password, :presence => true,
                        :confirmation => true,
-                       :length => { :within => 6..15 }
+                       :length => { :within => 6..20 }
   validates :email, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :email => true
@@ -35,7 +35,9 @@ class User < ActiveRecord::Base
     create! do |user|
       user.provider = auth["provider"]
       user.uid = auth["uid"]
-      user.login = auth["user_info"]["name"]
+      user.login = auth["info"]["nickname"]+".twitter"
+      user.email = "#{auth["info"]["nickname"]}@twitter.com"
+      user.password = Faker::Lorem.words.join("")
     end
   end
 
@@ -46,7 +48,7 @@ class User < ActiveRecord::Base
   end
 
   def fields_downcase
-    self.email = self.email.downcase
+    self.email = self.email.downcase if self.email.present?
     self.login = self.login.downcase
   end
 
