@@ -21,7 +21,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'will_paginate'
+gem "will_paginate", ">=3.0.pre2"
 
 gem 'jquery-rails'
 
@@ -35,7 +35,9 @@ gem 'bcrypt-ruby'
 
 gem 'omniauth-twitter'
 
-gem 'rails_admin'
+gem 'activeadmin'
+
+gem 'devise'
 
 #gem 'haml-rails'
 

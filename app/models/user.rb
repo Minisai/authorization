@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
                     :length => { :within => 3..30 }
   validates :password, :presence => true,
                        :confirmation => true,
-                       :length => { :within => 6..20 }
+                       :length => { :within => 6..30 }
   validates :email, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :email => true

@@ -1,4 +1,8 @@
 Authorization::Application.routes.draw do
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   resource :users, :except => [:destroy, :update]
   resource :sessions, :only => [:create, :destroy, :new]
 
