@@ -13,9 +13,10 @@ end
 User.create!(:login => "DAS", :email => "das@mail.ru", :password => "123456")
 
 50.times do |n|
-  login = Faker::Name.name
+  login = Faker::Name.last_name
 
-  User.create!(:login => login, :email => "#{login}@mail.ru", :password => "123456")
+  user = User.new(:login => login, :email => "#{login}@mail.ru", :password => "123456")
+  next unless user.save!
 end
 
 

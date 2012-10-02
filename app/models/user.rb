@@ -7,7 +7,9 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class User < ActiveRecord::Base
-  attr_accessible :auth2step, :email, :login, :password, :salt, :password_confirmation
+  has_secure_password
+
+  attr_accessible :auth2step, :email, :login, :password, :password_confirmation, :password_digest
 
   belongs_to :role
 
@@ -21,35 +23,35 @@ class User < ActiveRecord::Base
                     :uniqueness => { :case_sensitive => false },
                     :email => true
 
-  before_save :set_role, :encrypt_password
+  before_save :set_role, :fields_downcase
 
-  def valid_password?(submitted_password)
-    password = encrypt(submitted_password)
-  end
+  #def valid_password?(submitted_password)
+  #  password == submitted_password
+  #end
 
-  def self.authenticate(email, submitted_password)
-    user = find_by_email(email)
-    user ||= find_by_login(email)
-    return nil  if user.nil?
-    return user if user.valid_password?(submitted_password) #
-    #if user.valid_password?(submitted_password)
-    #  if user.auth2step
-    #    return user
-    #  else
-    #    return nil
-    #  end
-    #end
-  end
+  #def self.authenticate(email, submitted_password)
+  #  user = find_by_email(email)
+  #  user ||= find_by_login(email)
+  #  return nil  if user.nil?
+  #  return user if user.valid_password?(submitted_password) #
+  #  #if user.valid_password?(submitted_password)
+  #  #  if user.auth2step
+  #  #    return user
+  #  #  else
+  #  #    return nil
+  #  #  end
+  #  #end
+  #end
 
-  def self.authenticate_with_salt(id, cookie_salt)
+  def self.authenticate_with_cookies(id, cookie_password)
     user = find_by_id(id)
     return nil  if user.nil?
-    return user if user.salt == cookie_salt
+    return user if user.password == cookie_password
   end
 
-  def registration_token
-    self.salt[0..5]
-  end
+  #def registration_token
+  #  self.salt[0..5]
+  #end
 
   private
 
@@ -57,22 +59,26 @@ class User < ActiveRecord::Base
     User.all.count > 0 ? self.role = Role.user : self.role = Role.admin
   end
 
+  def fields_downcase
+    self.email = self.email.downcase
+    self.login = self.login.downcase
+  end
   #for password encrypting
-  def encrypt_password
-    self.salt = make_salt if new_record?
-    self.password = encrypt(password)
-  end
-
-  def encrypt(string)
-    secure_hash("#{salt}--#{string}")
-  end
-
-  def make_salt
-    secure_hash("#{Time.now.utc}--#{password}")
-  end
-
-  def secure_hash(string)
-    Digest::SHA2.hexdigest(string)
-  end
+  #def encrypt_password
+  #  self.salt = make_salt if new_record?
+  #  self.password = encrypt(password)
+  #end
+  #
+  #def encrypt(string)
+  #  secure_hash("#{salt}--#{string}")
+  #end
+  #
+  #def make_salt
+  #  secure_hash("#{Time.now.utc}--#{password}")
+  #end
+  #
+  #def secure_hash(string)
+  #  Digest::SHA2.hexdigest(string)
+  #end
 
 end

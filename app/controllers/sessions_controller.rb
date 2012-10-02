@@ -7,13 +7,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.authenticate(params[:session][:email],
-                             params[:session][:password])
-    if user.nil?
-      render 'new'
-    else
+    user = User.find_by_email(params[:session][:email].downcase)
+    user ||= User.find_by_login(params[:session][:email].downcase)  if user.blank?
+
+    if user.present? && user.authenticate(params[:session][:password])
       log_in user
       redirect_to current_user
+    else
+      @errors = Array.new
+      @errors << "User not found"
+      respond_to do |format|
+        format.html { redirect_to "log_in" }
+        format.js { render '/users/form' }
+      end
     end
   end
 

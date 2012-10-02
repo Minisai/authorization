@@ -7,6 +7,12 @@ div#myModal.modal tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ari
   div.modal-body
 
     = form_for(:session, :remote=>true, :url => sessions_path) do |f|
+      - if @errors.present?
+        - @errors.each do |error|
+          font color="red"
+            = error
+        -
+      -
 
       div.field
         = f.label :email, "Email or Login"
