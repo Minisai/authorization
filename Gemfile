@@ -19,6 +19,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem "asset_sync"
 end
 
 gem "will_paginate", ">=3.0.pre2"
