@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
                     :length => { :within => 3..30 }
   validates :password, :presence => true,
                        :confirmation => true,
-                       :length => { :within => 6..30 }
+                       :length => { :within => 6..20 }
   validates :email, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :email => true
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
       user.uid = auth["uid"]
       user.login = auth["info"]["nickname"]+".twitter"
       user.email = "#{auth["info"]["nickname"]}@twitter.com"
-      user.password = Faker::Lorem.words.join("")
+      user.password = Faker::Lorem.words.join("")[0..10]
     end
   end
 

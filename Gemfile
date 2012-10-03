@@ -40,6 +40,12 @@ gem 'activeadmin'
 
 gem 'devise'
 
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'simplecov', :require => false
+end
+
 #gem 'haml-rails'
 
 # To use ActiveModel has_secure_password
