@@ -26,8 +26,12 @@ class SessionsController < ApplicationController
     else
       auth = env["omniauth.auth"]
       user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
-      current_user = user
-      redirect_to current_user, :notice => "Log in!"
+      if user.present?
+        log_in user
+        redirect_to user, :notice => "Log in!"
+      else
+        redirect_to index_path
+      end
     end
   end
 
