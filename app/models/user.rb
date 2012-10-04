@@ -16,9 +16,8 @@ class User < ActiveRecord::Base
   validates :login, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :length => { :within => 3..30 }
-  validates :password, :presence => true,
-                       :confirmation => true,
-                       :length => { :within => 6..20 }
+  validates :password_digest, :presence => true,
+                              :confirmation => true
   validates :email, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :email => true
@@ -48,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def fields_downcase
-    self.email = self.email.downcase if self.email.present?
+    self.email = self.email.downcase
     self.login = self.login.downcase
   end
 

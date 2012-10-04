@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:show]
+  before_filter :authenticate, :only => [:show, :edit, :update]
 
   def show
     @user = User.find_by_id(params[:id])
@@ -39,13 +39,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+
+  end
+
+  def update
+    if current_user.update_attributes(params[:user])
+      redirect_to profile_path
+    else
+      render "edit"
+    end
+  end
+
   private
 
   def authenticate
     unless log_in?
       @user = User.new
       respond_to do |format|
-        format.html { redirect_to new_users_path}
+        format.html { redirect_to log_in_path}
         format.js { render 'form'}
       end
     end

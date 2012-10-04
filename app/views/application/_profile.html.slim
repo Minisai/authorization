@@ -6,4 +6,5 @@ div#profile
   = gravatar_for @user
   - if @user == current_user
     = @user.email
+    = button_to "Edit", edit_path
   -

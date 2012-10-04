@@ -3,13 +3,16 @@ Authorization::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resource :users, :except => [:destroy, :update]
+  resource :users, :except => [:destroy, :edit]
   resource :sessions, :only => [:create, :destroy, :new]
 
+  match "/profile" => "users#show", :via => :get, :as => :profile
   match "users/:id" => 'users#show', :as => :user
+  match "/edit" => 'users#edit', :as => :edit
+  match "/profile" => "users#update", :via => :put, :as => :update
 
   match "/index" => 'users#index'
-  match "/log_in" => 'sessions#new'
+  match "/log_in" => 'sessions#new', :as => :log_in
   match "/log_out" => 'sessions#destroy'
   match "/register" => 'users#new'
 
