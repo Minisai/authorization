@@ -5,7 +5,7 @@ ul.users
     li
       div.row
         div.span3
-          = gravatar_for user.email
+          = link_to gravatar_for(user), user, :remote => true
         div.span9
           dl
             dt

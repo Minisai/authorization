@@ -1,7 +1,19 @@
 div.nav-collapse
   ul.nav
     li.active
-      = link_to "Home", "/users/", :remote => true
+      - if current_user.present?
+        ul.nav
+          li.dropdown
+            a.dropdown-toggle href="" data-toggle="dropdown"
+              |Account
+              b.caret
+            ul.dropdown-menu
+              = link_to "Home", users_path, :remote => true
+
+
+      -else
+        = link_to "Account", users_path, :remote => true
+      -
     li
       = link_to "Users", index_path, :remote => true
       - if current_user.present?

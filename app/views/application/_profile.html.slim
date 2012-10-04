@@ -3,7 +3,7 @@ div#profile
   h1
     =@user.login
   p
-  = gravatar_for @user.email
+  = gravatar_for @user
   - if @user == current_user
     = @user.email
   -
