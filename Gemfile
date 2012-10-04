@@ -23,6 +23,7 @@ group :assets do
 end
 
 gem "will_paginate", ">=3.0.pre2"
+gem "bootstrap-will_paginate"
 
 gem 'jquery-rails'
 
