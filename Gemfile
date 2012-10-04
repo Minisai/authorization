@@ -23,7 +23,6 @@ group :assets do
 end
 
 gem 'kaminari'
-gem 'bootstrap_kaminari'
 
 gem 'jquery-rails'
 

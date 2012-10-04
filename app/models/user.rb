@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
                     :uniqueness => { :case_sensitive => false },
                     :email => true
 
-  before_save :set_role, :fields_downcase
+  before_save :fields_downcase
 
   def self.find_by_email_or_login(value)
     User.where("email = ? OR login = ?", value, value).first
