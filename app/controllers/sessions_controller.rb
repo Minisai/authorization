@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 
         redirect_to current_user
       else
-        @errors = Array.new
+        @errors = []
         @errors << "User not found"
         respond_to do |format|
           format.html { redirect_to "log_in" }

@@ -1,10 +1,9 @@
 
-div#profile
+#profile
   h1
-    =@user.login
+    = @user.login
   p
   = gravatar_for @user
-  - if @user == current_user
+  - if current_user?(@user)
     = @user.email
     = button_to "Edit", edit_path
-  -

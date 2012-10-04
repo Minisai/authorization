@@ -22,8 +22,8 @@ group :assets do
   gem "asset_sync"
 end
 
-gem "will_paginate", ">=3.0.pre2"
-gem "bootstrap-will_paginate"
+gem 'kaminari'
+gem 'bootstrap_kaminari'
 
 gem 'jquery-rails'
 

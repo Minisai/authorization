@@ -3,17 +3,14 @@
     - current_user.errors.full_messages.each do |msg|
       li
         = msg
-    -
-  -
   h2
     | Profile Edit
-  div.field
+  .field
     = f.label :login
     = f.text_field :login
-  div.field
+  .field
     = f.label :email
     = f.text_field :email
-  div.actions
+  .actions
     = link_to "Cancel", profile_path, :class => "btn btn-danger"
     = f.submit "Apply", :class => "btn btn-success", :style => "margin-left:60"
--

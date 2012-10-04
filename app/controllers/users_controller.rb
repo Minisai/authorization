@@ -11,8 +11,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = Role.user.users
-    @users = @users.paginate(:per_page => 5, :page => params[:page])
+    @users = User.page(params[:page]).per(5)
   end
 
   def new
@@ -54,7 +53,7 @@ class UsersController < ApplicationController
   private
 
   def authenticate
-    unless log_in?
+    unless logged_in?
       @user = User.new
       respond_to do |format|
         format.html { redirect_to log_in_path}

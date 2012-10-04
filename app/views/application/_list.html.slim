@@ -1,17 +1,17 @@
-= will_paginate
+= paginate @users
 
 ul.users
   -@users.each do |user|
     li
-      div.row
-        div.span3
+      .row
+        .span3
           = link_to gravatar_for(user), user, :remote => true
-        div.span9
+        .span9
           dl
             dt
               | Login
             dd
               = link_to user.login, user, :remote => true
-  -
 
-= will_paginate
+
+= paginate @users

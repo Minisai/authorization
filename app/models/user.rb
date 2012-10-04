@@ -11,8 +11,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :auth2step, :provider, :uid, :email, :login, :password, :password_confirmation, :password_digest
 
-  belongs_to :role
-
   validates :login, :presence => true,
                     :uniqueness => { :case_sensitive => false },
                     :length => { :within => 3..30 }
@@ -41,10 +39,6 @@ class User < ActiveRecord::Base
   end
 
   private
-
-  def set_role
-    User.all.count > 0 ? self.role = Role.user : self.role = Role.admin
-  end
 
   def fields_downcase
     self.email = self.email.downcase

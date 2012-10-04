@@ -1,7 +1,7 @@
 h2 Register now!
 = form_for(@user) do |f|
   - if @user.errors.any?
-    div#error_explanation
+    #error_explanation
       h2
         | Sorry, you have
         = pluralize(@user.errors.count, "error")
@@ -9,24 +9,21 @@ h2 Register now!
         - @user.errors.full_messages.each do |msg|
           li
             = msg
-        -
-  -
 
-  div.field
+  .field
     = f.label :login
     = f.text_field :login
-  div.field
+  .field
     = f.label :email
     = f.text_field :email
-  div.field
+  .field
     = f.label :password
     = f.password_field :password
-  div.field
+  .field
     = f.label :password_confirmation, "Confirmation"
     = f.password_field :password_confirmation
-  div.actions
+  .actions
     = f.submit "Register"
--
 p
   | Already registered?
   = link_to " Log in!", new_sessions_path

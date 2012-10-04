@@ -1,10 +1,10 @@
 a#modalButton href="#myModal" role="button" class="btn" data-toggle="modal" style="display:none"
 
-div#myModal.modal tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
-  div.modal-header
+#myModal.modal tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"
+  .modal-header
     button type="button" id="closeButton" class="close" data-dismiss="modal" aria-hidden="true" &times
     h1 Log in
-  div.modal-body
+  .modal-body
 
     = form_for(:session, :remote=>true, :url => sessions_path) do |f|
       - if @errors.present?
@@ -12,19 +12,16 @@ div#myModal.modal tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ari
           li
             font color="red"
               = msg
-        -
-      -
 
-      div.field
+      .field
         = f.label :email, "Email or Login"
         = f.text_field :email
-      div.field
+      .field
         = f.label :password
         = f.password_field :password
-      div.actions
+      .actions
         button type="button" class="btn btn-danger" data-dismiss="modal" aria-hidden="true" Close
         = f.submit "Log in", :class => "btn btn-success"
-    -
     p
       | New user?
       = link_to " Register now!", new_users_path, :remote=>true

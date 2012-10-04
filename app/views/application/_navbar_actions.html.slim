@@ -1,4 +1,4 @@
-div.nav-collapse
+.nav-collapse
   ul.nav
     li.active
       - if current_user.present?
@@ -8,13 +8,12 @@ div.nav-collapse
               |Account
               b.caret
             ul.dropdown-menu
-              = link_to "Home", users_path, :remote => true
+              = link_to "Home",  profile_path, :remote => true
               = link_to "Edit", edit_path
 
 
       -else
-        = link_to "Account", users_path, :remote => true
-      -
+        = link_to "Account", profile_path, :remote => true
     li
       = link_to "Users", index_path, :remote => true
       - if current_user.present?
