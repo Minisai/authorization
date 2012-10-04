@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
 
   before_save :set_role, :fields_downcase
 
+  def self.find_by_email_or_login(value)
+    User.where("email = ? OR login = ?", value, value).first
+  end
+
   def self.authenticate_with_cookies(id, cookie_password)
     user = find_by_id(id)
     return nil  if user.nil?

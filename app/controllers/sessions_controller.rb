@@ -8,8 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     if params[:provider].blank?
-      user = User.find_by_email(params[:session][:email].downcase)
-      user ||= User.find_by_login(params[:session][:email].downcase)  if user.blank?
+      user = User.find_by_email_or_login(params[:session][:email].downcase)
 
       if user.present? && user.authenticate(params[:session][:password])
         log_in user
